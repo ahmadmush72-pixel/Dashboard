@@ -1,6 +1,8 @@
+import React from "react";
 import RecentOrder from "@/components/dashboard/RecentOrder";
 import RevenueChart from "@/components/dashboard/RevenueChart";
-import { Button } from "@/components/ui/button";
+import Reveal from "@/components/ui/Reveal";
+import { useCountUp } from "@/lib/animations";
 import {
   Archive,
   BaggageClaim,
@@ -8,82 +10,100 @@ import {
   TrendingUp,
   Users,
 } from "lucide-react";
-import React from "react";
+
+function StatCard({ item }) {
+  const count = useCountUp(item.count, 1400);
+
+  return (
+    <Reveal className="rounded-3xl bg-white p-5 shadow-xl shadow-primary/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl">
+      <div className="flex items-start justify-between gap-4">
+        <span className="rounded-2xl bg-primary/20 text-primary p-3 animate-float">
+          {item.icon}
+        </span>
+        <div className="rounded-2xl bg-primary/10 px-3 py-1 text-xs font-semibold uppercase text-primary">
+          {item.desc}
+        </div>
+      </div>
+      <div className="mt-4">
+        <p className="text-xs font-semibold text-gray-500 uppercase">
+          {item.title}
+        </p>
+        <p className="text-3xl font-black text-primary mt-2">
+          {item.prefix}
+          {count}
+          {item.suffix}
+        </p>
+      </div>
+    </Reveal>
+  );
+}
 
 export default function Dashboard() {
   const states = [
     {
-      title: "total users",
+      title: "Total users",
       icon: <Users className="w-5 h-5" />,
-      user: "12,00",
+      count: 1200,
       desc: "+5.2%",
-      trendIcon: <TrendingUp className="w-4 h-3" />,
+      prefix: "",
+      suffix: "",
     },
     {
       title: "Active products",
       icon: <Archive className="w-5 h-5" />,
-      user: "12,00",
-      desc: "+5.2%",
-      trendIcon: <TrendingUp className="w-4 h-3" />,
+      count: 420,
+      desc: "+7.8%",
+      prefix: "",
+      suffix: "",
     },
     {
       title: "Total orders",
       icon: <BaggageClaim className="w-5 h-5" />,
-      user: "12,00",
-      desc: "+5.2%",
-      trendIcon: <TrendingUp className="w-4 h-3" />,
+      count: 1342,
+      desc: "+3.1%",
+      prefix: "",
+      suffix: "",
     },
     {
-      title: "net revenues",
-      icon: <DollarSign />,
-      user: "$12,0034",
+      title: "Net revenue",
+      icon: <DollarSign className="w-5 h-5" />,
+      count: 12234,
       desc: "+5.2%",
-      trendIcon: <TrendingUp className="w-4 h-3" />,
+      prefix: "$",
+      suffix: "",
     },
   ];
-  return (
-    <div className="container px-3">
-      <div className="">
-        <h1 className="text-2xl font-bold text-primary uppercase">
-          Admin Dashboard
-        </h1>
-        <p className="font-medium text-gray-500 text-sm">
-          Platform performance and commercial insights
-        </p>
-      </div>
 
-      <div className="flex justify-between items-center mt-5">
-        {states.map((item, index) => (
-          <div
-            key={index}
-            className="rounded-2xl border-primary/20 p-4 border shadow-md shadow-primary/10  bg-white w-[20%]"
-          >
-            <div className="flex items-start justify-between">
-              <span className="rounded-lg bg-primary/30 text-primary p-2 py-3">
-                {item.icon}
-              </span>
-              <div className="flex items-center justify-between text-primary bg-primary/10 rounded-2xl text-xs px-2 py-1 font-medium gap-2">
-                <span>{item.desc}</span>
-                <span>{item.trendIcon}</span>
-              </div>
-            </div>
-            <div className="mt-3">
-              <h1 className="text-sm font-medium text-gray-500 uppercase">
-                {item.title}
-              </h1>
-              <p className="font-black text-2xl ">{item.user}</p>
-            </div>
-          </div>
+  return (
+    <div className="mx-auto w-full max-w-6xl space-y-6 px-3 pb-8">
+      <Reveal>
+        <div className="space-y-3">
+          <h1 className="text-3xl font-bold text-primary uppercase tracking-tight">
+            Admin Dashboard
+          </h1>
+          <p className="text-sm font-medium text-gray-500">
+            Platform performance and commercial insights
+          </p>
+        </div>
+      </Reveal>
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {states.map((item) => (
+          <StatCard key={item.title} item={item} />
         ))}
       </div>
-      {/* chart */}
-      <div className="bg-white w-full shadow-lg shadow-primary/10  rounded-2xl p-6 mt-5 border border-primary/20">
-        <RevenueChart />
-      </div>
-      {/* recent orders */}
-      <div className="bg-white w-full shadow-lg shadow-primary/10 rounded-2xl p-2 mt-5 border border-primary/20">
-        <RecentOrder />
-      </div>
+
+      <Reveal>
+        <div className="overflow-hidden rounded-3xl bg-white p-6 shadow-xl shadow-primary/10 border border-primary/10">
+          <RevenueChart />
+        </div>
+      </Reveal>
+
+      <Reveal>
+        <div className="overflow-hidden rounded-3xl bg-white p-2 shadow-xl shadow-primary/10 border border-primary/10">
+          <RecentOrder />
+        </div>
+      </Reveal>
     </div>
   );
 }

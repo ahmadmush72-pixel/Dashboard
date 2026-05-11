@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import React from "react";
+import Reveal from "@/components/ui/Reveal";
 
 import {
   Table,
@@ -39,7 +40,7 @@ export default function RecentOrder() {
   ];
 
   return (
-    <div className="flex flex-col  p-4 space-y-2">
+    <Reveal className="flex flex-col p-4 space-y-2 rounded-3xl bg-white shadow-xl shadow-primary/10">
       {/* header */}
       <div className="flex items-center justify-between">
         <h1 className="font-bold text-lg">Recent Orders</h1>
@@ -95,6 +96,6 @@ export default function RecentOrder() {
           ))}
         </TableBody>
       </Table>
-    </div>
+    </Reveal>
   );
 }

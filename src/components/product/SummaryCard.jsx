@@ -1,6 +1,6 @@
-import { icons, QrCode, TriangleAlert, Wallet } from "lucide-react";
-
+import { QrCode, TriangleAlert, Wallet } from "lucide-react";
 import React from "react";
+import Reveal from "@/components/ui/Reveal";
 
 export default function SummaryCard() {
   const SummaryCart = [
@@ -21,13 +21,13 @@ export default function SummaryCard() {
     },
   ];
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+    <Reveal>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 mt-5">
         {SummaryCart.map((item, index) => {
           return (
             <div
               key={index}
-              className=" flex justify-between shadow-md shadow-primary/10  items-center border rounded-2xl p-5 border-primary/20 bg-white"
+              className=" flex justify-between shadow-md shadow-primary/10  items-center  rounded-2xl p-5 bg-white"
             >
               <div className="flex flex-col gap-1">
                 <h1 className="font-medium text-gray-500 text-[13px] uppercase">
@@ -58,6 +58,6 @@ export default function SummaryCard() {
           );
         })}
       </div>
-    </div>
+    </Reveal>
   );
 }

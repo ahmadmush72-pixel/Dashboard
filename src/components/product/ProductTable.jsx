@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
+import Reveal from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/button";
 
 import { Pencil, Trash2, Eye, ChevronLeft, ChevronRight } from "lucide-react";
@@ -86,171 +86,173 @@ export default function ProductTable() {
   const end = Math.min(endIndex, totalProducts);
 
   return (
-    <div className="space-y-5 border shadow-primary/10 rounded-2xl border-primary/20 shadow-lg">
-      {/* Table */}
-      <div className="bg-white shadow-primary/8 shadow-lg rounded-2xl p-4">
-        <Table className="rounded-2xl  overflow-hidden">
-          <TableHeader>
-            <TableRow>
-              <TableHead>Image</TableHead>
-              <TableHead>Product Name</TableHead>
-              <TableHead>Category</TableHead>
-              <TableHead>Price</TableHead>
-              <TableHead>Stock Level</TableHead>
-              <TableHead>Actions</TableHead>
-            </TableRow>
-          </TableHeader>
+    <Reveal>
+      <div className="space-y-5  shadow-primary/10 rounded-2xl  shadow-lg">
+        {/* Table */}
+        <div className="bg-white shadow-primary/8 shadow-lg rounded-2xl p-4">
+          <Table className="rounded-2xl  overflow-hidden">
+            <TableHeader>
+              <TableRow>
+                <TableHead>Image</TableHead>
+                <TableHead>Product Name</TableHead>
+                <TableHead>Category</TableHead>
+                <TableHead>Price</TableHead>
+                <TableHead>Stock Level</TableHead>
+                <TableHead>Actions</TableHead>
+              </TableRow>
+            </TableHeader>
 
-          <TableBody>
-            {currentProducts.map((product) => {
-              const lowStock = product.stock <= 5;
-              const stockWidth = `${(product.stock / 20) * 100}%`;
+            <TableBody>
+              {currentProducts.map((product) => {
+                const lowStock = product.stock <= 5;
+                const stockWidth = `${(product.stock / 20) * 100}%`;
 
-              return (
-                <TableRow key={product.id}>
-                  {/* Image */}
-                  <TableCell>
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-12 h-12 rounded-lg object-cover border"
-                    />
-                  </TableCell>
+                return (
+                  <TableRow key={product.id}>
+                    {/* Image */}
+                    <TableCell>
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-12 h-12 rounded-lg object-cover border"
+                      />
+                    </TableCell>
 
-                  {/* Name */}
-                  <TableCell>
-                    <div>
-                      <p className="font-semibold text-primary">
-                        {product.name}
-                      </p>
-                      <p className="text-xs text-gray-400">
-                        SKU: {product.sku}
-                      </p>
-                    </div>
-                  </TableCell>
-
-                  {/* Category */}
-                  <TableCell>
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        categoryColors[product.category]
-                      }`}
-                    >
-                      {product.category}
-                    </span>
-                  </TableCell>
-
-                  {/* Price */}
-                  <TableCell>${product.price}</TableCell>
-
-                  {/* Stock */}
-                  <TableCell>
-                    <div className="flex items-center gap-3">
-                      <div className="w-20 h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div
-                          style={{ width: stockWidth }}
-                          className={`h-full rounded-full ${
-                            lowStock ? "bg-red-500" : "bg-blue-600"
-                          }`}
-                        />
+                    {/* Name */}
+                    <TableCell>
+                      <div>
+                        <p className="font-semibold text-primary">
+                          {product.name}
+                        </p>
+                        <p className="text-xs text-gray-400">
+                          SKU: {product.sku}
+                        </p>
                       </div>
+                    </TableCell>
 
+                    {/* Category */}
+                    <TableCell>
                       <span
-                        className={`text-sm ${
-                          lowStock ? "text-red-500" : "text-gray-600"
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          categoryColors[product.category]
                         }`}
                       >
-                        {lowStock
-                          ? `Low: ${product.stock}`
-                          : `${product.stock} Units`}
+                        {product.category}
                       </span>
-                    </div>
-                  </TableCell>
+                    </TableCell>
 
-                  {/* Actions */}
-                  <TableCell>
-                    <div className="flex gap-2">
-                      <Link to="/products/edit">
+                    {/* Price */}
+                    <TableCell>${product.price}</TableCell>
+
+                    {/* Stock */}
+                    <TableCell>
+                      <div className="flex items-center gap-3">
+                        <div className="w-20 h-2 bg-gray-200 rounded-full overflow-hidden">
+                          <div
+                            style={{ width: stockWidth }}
+                            className={`h-full rounded-full ${
+                              lowStock ? "bg-red-500" : "bg-blue-600"
+                            }`}
+                          />
+                        </div>
+
+                        <span
+                          className={`text-sm ${
+                            lowStock ? "text-red-500" : "text-gray-600"
+                          }`}
+                        >
+                          {lowStock
+                            ? `Low: ${product.stock}`
+                            : `${product.stock} Units`}
+                        </span>
+                      </div>
+                    </TableCell>
+
+                    {/* Actions */}
+                    <TableCell>
+                      <div className="flex gap-2">
+                        <Link to="/products/edit">
+                          <Button
+                            size="icon"
+                            variant="ghost"
+                            className="text-blue-600 bg-blue-100 cursor-pointer"
+                          >
+                            <Pencil size={18} />
+                          </Button>
+                        </Link>
+
                         <Button
                           size="icon"
                           variant="ghost"
-                          className="text-blue-600 bg-blue-100 cursor-pointer"
+                          className="text-red-500  bg-red-100 cursor-pointer"
                         >
-                          <Pencil size={18} />
+                          <Trash2 size={18} />
                         </Button>
-                      </Link>
 
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        className="text-red-500  bg-red-100 cursor-pointer"
-                      >
-                        <Trash2 size={18} />
-                      </Button>
+                        <Link to="/products/show">
+                          <Button
+                            size="icon"
+                            variant="ghost"
+                            className="text-gray-600  bg-gray-200 cursor-pointer"
+                          >
+                            <Eye size={18} />
+                          </Button>
+                        </Link>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </div>
 
-                      <Link to="/products/show">
-                        <Button
-                          size="icon"
-                          variant="ghost"
-                          className="text-gray-600  bg-gray-200 cursor-pointer"
-                        >
-                          <Eye size={18} />
-                        </Button>
-                      </Link>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </div>
+        {/* Pagination */}
+        <div className="flex items-center justify-between bg-[#f4f3fb] rounded-2xl px-5 py-4">
+          <p className="text-sm text-gray-500 font-medium">
+            Showing {start}-{end} of{" "}
+            <span className="font-bold text-primary">{totalProducts}</span>{" "}
+            products
+          </p>
 
-      {/* Pagination */}
-      <div className="flex items-center justify-between bg-[#f4f3fb] rounded-2xl px-5 py-4">
-        <p className="text-sm text-gray-500 font-medium">
-          Showing {start}-{end} of{" "}
-          <span className="font-bold text-primary">{totalProducts}</span>{" "}
-          products
-        </p>
-
-        <div className="flex items-center gap-2">
-          {/* Prev */}
-          <button
-            onClick={() =>
-              setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev))
-            }
-            className="w-9 h-9 rounded-lg bg-white shadow-sm flex items-center justify-center"
-          >
-            <ChevronLeft size={18} />
-          </button>
-
-          {/* Pages */}
-          {Array.from({ length: totalPages }).map((_, index) => (
+          <div className="flex items-center gap-2">
+            {/* Prev */}
             <button
-              key={index}
-              onClick={() => setCurrentPage(index + 1)}
-              className={`w-9 h-9 rounded-lg font-medium ${
-                currentPage === index + 1
-                  ? "bg-primary text-white"
-                  : "bg-white text-gray-700"
-              }`}
+              onClick={() =>
+                setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev))
+              }
+              className="w-9 h-9 rounded-lg bg-white shadow-sm flex items-center justify-center"
             >
-              {index + 1}
+              <ChevronLeft size={18} />
             </button>
-          ))}
 
-          {/* Next */}
-          <button
-            onClick={() =>
-              setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev))
-            }
-            className="w-9 h-9 rounded-lg bg-white shadow-sm flex items-center justify-center"
-          >
-            <ChevronRight size={18} />
-          </button>
+            {/* Pages */}
+            {Array.from({ length: totalPages }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentPage(index + 1)}
+                className={`w-9 h-9 rounded-lg font-medium ${
+                  currentPage === index + 1
+                    ? "bg-primary text-white"
+                    : "bg-white text-gray-700"
+                }`}
+              >
+                {index + 1}
+              </button>
+            ))}
+
+            {/* Next */}
+            <button
+              onClick={() =>
+                setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev))
+              }
+              className="w-9 h-9 rounded-lg bg-white shadow-sm flex items-center justify-center"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </Reveal>
   );
 }

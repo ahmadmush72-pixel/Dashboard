@@ -1,26 +1,36 @@
-import React from "react";
-
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Navbaar from "./Navbaar";
 
 export default function Layout() {
+  const [mobileMenu, setMobileMenu] = useState(false);
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-12 h-screen overflow-hidden">
-      {/* Sidebar */}
-      <aside className="col-span-1 flex flex-col  justify-between md:col-span-2 bg-gray-100 p-5 border border-primary/10 order-t-0 border-b-0 ">
+    <div className="relative min-h-screen md:grid md:grid-cols-[280px_1fr]">
+      <aside
+        className={`fixed inset-y-0 left-0 z-30 w-full max-w-sm bg-primary p-5 transition-transform duration-300 md:static md:translate-x-0 ${
+          mobileMenu ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
         <Sidebar />
       </aside>
 
-      {/* Right Side */}
-      <div className="col-span-1 md:col-span-10 flex flex-col overflow-hidden">
-        {/* Fixed Navbar */}
+      <div
+        className={`fixed inset-0 bg-black/20 transition-opacity duration-300 md:hidden ${
+          mobileMenu
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0"
+        }`}
+        onClick={() => setMobileMenu(false)}
+      />
+
+      <div className="flex flex-col min-h-screen md:col-span-1 md:overflow-hidden">
         <header className="shrink-0">
-          <Navbaar />
+          <Navbaar onMenuToggle={() => setMobileMenu((prev) => !prev)} />
         </header>
 
-        {/* Scroll Only Outlet */}
-        <main className="flex-1 overflow-y-auto bg-primary/3 p-5">
+        <main className="flex-1 overflow-y-auto bg-primary/5 p-4 md:p-5">
           <Outlet />
         </main>
       </div>
