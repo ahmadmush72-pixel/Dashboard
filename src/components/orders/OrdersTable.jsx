@@ -7,6 +7,14 @@ import {
 } from "lucide-react";
 import Reveal from "../ui/Reveal";
 import { Link } from "react-router-dom";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 const allOrders = [
   {
@@ -178,37 +186,37 @@ export default function OrdersTable() {
       {/* Table */}
       <Reveal>
         <div className="overflow-x-auto rounded-2xl border border-primary/10">
-          <table className="w-full min-w-[950px]">
-            <thead className="bg-[#f8f8fc]">
-              <tr className="text-left text-[11px] uppercase tracking-widest text-gray-400">
-                <th className="px-6 py-5">Order ID</th>
-                <th className="px-6 py-5">Date</th>
-                <th className="px-6 py-5">Customer</th>
-                <th className="px-6 py-5">Total Amount</th>
-                <th className="px-6 py-5">Status</th>
-                <th className="px-6 py-5 text-center">Actions</th>
-              </tr>
-            </thead>
+          <Table className="w-full min-w-[950px]">
+            <TableHeader>
+              <TableRow className="text-left text-[11px] uppercase tracking-widest text-gray-400 bg-[#f8f8fc]">
+                <TableHead className="px-6 py-5">Order ID</TableHead>
+                <TableHead className="px-6 py-5">Date</TableHead>
+                <TableHead className="px-6 py-5">Customer</TableHead>
+                <TableHead className="px-6 py-5">Total Amount</TableHead>
+                <TableHead className="px-6 py-5">Status</TableHead>
+                <TableHead className="px-6 py-5 text-center">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
 
-            <tbody>
+            <TableBody>
               {currentOrders.map((order, index) => (
-                <tr
+                <TableRow
                   key={index}
-                  className="border-t border-gray-100  transition hover:bg-primary/10"
+                  className="border-t border-gray-100 transition hover:bg-primary/10"
                 >
-                  <td className="px-6 py-5">
+                  <TableCell className="px-6 py-5">
                     <p className="text-sm font-semibold text-primary">
                       {order.id}
                     </p>
-                  </td>
+                  </TableCell>
 
-                  <td className="px-6 py-5">
+                  <TableCell className="px-6 py-5">
                     <p className="text-sm font-medium text-gray-700">
                       {order.date}
                     </p>
-                  </td>
+                  </TableCell>
 
-                  <td className="px-6 py-5">
+                  <TableCell className="px-6 py-5">
                     <div className="flex items-center gap-3">
                       <div
                         className={`flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold ${order.color}`}
@@ -224,23 +232,23 @@ export default function OrdersTable() {
                         <p className="text-xs text-gray-400">{order.email}</p>
                       </div>
                     </div>
-                  </td>
+                  </TableCell>
 
-                  <td className="px-6 py-5">
+                  <TableCell className="px-6 py-5">
                     <p className="text-sm font-bold text-gray-800">
                       {order.amount}
                     </p>
-                  </td>
+                  </TableCell>
 
-                  <td className="px-6 py-5">
+                  <TableCell className="px-6 py-5">
                     <span
                       className={`rounded-full px-3 py-1 text-[11px] font-bold tracking-wide ${order.statusColor}`}
                     >
                       {order.status}
                     </span>
-                  </td>
+                  </TableCell>
 
-                  <td className="px-6 py-5">
+                  <TableCell className="px-6 py-5">
                     <div className="flex items-center justify-center gap-4 text-gray-400">
                       <Link to="/orders/show">
                         <button className="transition hover:text-primary">
@@ -252,11 +260,11 @@ export default function OrdersTable() {
                         <SlidersHorizontal size={18} />
                       </button>
                     </div>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
 
           {/* Footer */}
           <div className="flex flex-col gap-4 border-t border-gray-100 px-6 py-5 lg:flex-row lg:items-center lg:justify-between">
