@@ -29,7 +29,6 @@ function App() {
         <Route path="categories/form" element={<CategoryForm />} />
         <Route path="categories/edit" element={<CategoryEdit />} />
         {/* Orders */}
-
         <Route path="orders" element={<Orders />} />
 
         <Route path="customers" element={<User />} />

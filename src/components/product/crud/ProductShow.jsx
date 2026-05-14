@@ -28,9 +28,9 @@ export default function ProductShow() {
 
   return (
     <Reveal>
-      <div className="px-3 space-y-4 rounded-3xl bg-white p-4 shadow-xl shadow-primary/10">
+      <div className="px-4 max-w-6xl mx-auto space-y-6 p-4 ">
         <div>
-          <h1 className="uppercase text-2xl font-bold text-primary">
+          <h1 className="uppercase text-3xl tracking-tight font-bold text-primary">
             Product Detail
           </h1>
           <p className="text-sm font-medium text-gray-500">

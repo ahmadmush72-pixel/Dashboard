@@ -9,7 +9,7 @@ export default function Layout() {
   return (
     <div className="relative min-h-screen md:grid md:grid-cols-[280px_1fr]">
       <aside
-        className={`fixed inset-y-0 left-0 z-30 w-full max-w-sm bg-primary p-5 transition-transform duration-300 md:static md:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-30 w-full max-w-sm bg-primary p-5 transition-transform duration-300 md:static md:sticky md:top-0 md:h-screen md:overflow-y-auto md:translate-x-0 ${
           mobileMenu ? "translate-x-0" : "-translate-x-full"
         }`}
       >

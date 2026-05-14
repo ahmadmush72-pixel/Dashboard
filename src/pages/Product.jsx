@@ -15,7 +15,7 @@ export default function Product() {
             <h1 className="text-3xl font-bold text-primary uppercase tracking-tight">
               Products Archive
             </h1>
-            <p className="text-sm font-medium text-gray-500">
+            <p className="text-sm text-gray-500 max-w-md ">
               Manage and curate your high-end inventory collections.
             </p>
           </div>

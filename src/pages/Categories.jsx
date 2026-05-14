@@ -15,8 +15,8 @@ export default function Categories() {
             <h1 className="text-3xl font-bold text-primary uppercase tracking-tight">
               Categories archive
             </h1>
-            <p className="text-sm font-medium text-gray-500">
-              Manage and organize your product taxonomy
+            <p className="text-sm text-gray-500 max-w-md ">
+              Manage and organize your product taxonomy.
             </p>
           </div>
           <Link to="/categories/form">

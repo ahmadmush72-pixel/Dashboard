@@ -81,7 +81,7 @@ export default function Dashboard() {
           <h1 className="text-3xl font-bold text-primary uppercase tracking-tight">
             Admin Dashboard
           </h1>
-          <p className="text-sm font-medium text-gray-500">
+          <p className="text-sm text-gray-500 max-w-md ">
             Platform performance and commercial insights
           </p>
         </div>
